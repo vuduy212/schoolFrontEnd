@@ -534,41 +534,89 @@
               </div>
               <div class="card-body">
                 <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">Create giang vien</div>
-                                <div class="card-body">
-                                    <form action="{{ route('permissions.store') }}" method="POST">
-                                        <div class="form-group row">
-                                            <label for="name" class="col-md-4 col-form-label text-md-right">Ten giang vien</label>
-                                            <div class="col-md-6">
-                                                <input id="name" type="name" class="form-control" name="ho_ten">
-                                            </div>
-                                            <label for="name" class="col-md-4 col-form-label text-md-right">Ngay sinh</label>
-                                            <div class="col-md-6">
-                                                <input id="action" type="name" class="form-control" name="ngay_sinh">
-                                            </div>
-                                            <label for="name" class="col-md-4 col-form-label text-md-right">Gioi tinh</label>
-                                            <div class="col-md-6">
-                                                <input id="action" type="name" class="form-control" name="gioi_tinh">
-                                            </div>
-                                            <label for="name" class="col-md-4 col-form-label text-md-right">Chuc vu</label>
-                                            <div class="col-md-6">
-                                                <input id="action" type="name" class="form-control" name="chuc_vu">
-                                            </div>
-                                            <label for="name" class="col-md-4 col-form-label text-md-right">Khoa</label>
-                                            <div class="col-md-6">
-                                                <input id="action" type="name" class="form-control" name="khoa">
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">
-                                            Create
-                                        </button>
-                                </div>
+                  <div class="row justify-content-center">
+                    <div class="col-md-8">
+                      <div class="card">
+                        <div class="card-header">Create giang vien</div>
+                        <div class="card-body">
+                          <div class="form-group row">
+                            <label
+                              for="name"
+                              class="col-md-4 col-form-label text-md-right"
+                              >Ten giang vien</label
+                            >
+                            <div class="col-md-6">
+                              <input
+                                id="ho_ten"
+                                type="name"
+                                class="form-control"
+                                name="ho_ten"
+                              />
                             </div>
+                            <label
+                              for="name"
+                              class="col-md-4 col-form-label text-md-right"
+                              >Ngay sinh</label
+                            >
+                            <div class="col-md-6">
+                              <input
+                                id="ngay_sinh"
+                                type="name"
+                                class="form-control"
+                                name="ngay_sinh"
+                              />
+                            </div>
+                            <label
+                              for="name"
+                              class="col-md-4 col-form-label text-md-right"
+                              >Gioi tinh</label
+                            >
+                            <div class="col-md-6">
+                              <input
+                                id="gioi_tinh"
+                                type="name"
+                                class="form-control"
+                                name="gioi_tinh"
+                              />
+                            </div>
+                            <label
+                              for="name"
+                              class="col-md-4 col-form-label text-md-right"
+                              >Chuc vu</label
+                            >
+                            <div class="col-md-6">
+                              <input
+                                id="chuc_vu"
+                                type="name"
+                                class="form-control"
+                                name="chuc_vu"
+                              />
+                            </div>
+                            <label
+                              for="name"
+                              class="col-md-4 col-form-label text-md-right"
+                              >Khoa</label
+                            >
+                            <div class="col-md-6">
+                              <input
+                                id="khoa"
+                                type="name"
+                                class="form-control"
+                                name="khoa"
+                              />
+                            </div>
+                          </div>
+                          <button
+                            onClick="taoMoiGiangVien()"
+                            type="submit"
+                            class="btn btn-primary"
+                          >
+                            Create
+                          </button>
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -651,5 +699,46 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+    <script>
+      const apiTaoMoiGiangVien = "http://127.0.0.1:5000/giang_vien";
+      async function callApiTaoMoiGiangVien(data) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify({
+          ho_ten: data["ho_ten"],
+          gioi_tinh: data["gioi_tinh"],
+          ngay_sinh: data["ngay_sinh"],
+          khoa: data["khoa"],
+          chuc_vu: data["chuc_vu"],
+        });
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+        const response = await fetch(
+          "http://127.0.0.1:5000/giang_vien",
+          requestOptions
+        );
+        alert("Tạo mới giảng viên thành công !");
+        return await response;
+      }
+      async function taoMoiGiangVien() {
+        var ho_ten = document.getElementById("ho_ten").value;
+        var gioi_tinh = document.getElementById("gioi_tinh").value;
+        var ngay_sinh = document.getElementById("ngay_sinh").value;
+        var khoa = document.getElementById("khoa").value;
+        var chuc_vu = document.getElementById("chuc_vu").value;
+        const createDataGiangVien = {
+          ho_ten: ho_ten,
+          gioi_tinh: gioi_tinh,
+          ngay_sinh: ngay_sinh,
+          khoa: khoa,
+          chuc_vu: chuc_vu,
+        };
+        var data = await callApiTaoMoiGiangVien(createDataGiangVien);
+      }
+    </script>
   </body>
 </html>

@@ -548,7 +548,7 @@
           data["ma_giang_vien"] +
           " href='sua_giang_vien.html'>Cập nhật</a>" +
           " " +
-          "<a onClick='xoaGiangVien(" +
+          "<a onClick='callApiXoaGiangVien(" +
           data["ma_giang_vien"] +
           ")' id=" +
           data["ma_giang_vien"] +
@@ -558,6 +558,27 @@
       function capNhatGiangVien(maGiangVien) {
         // var a = document.getElementById(maGiangVien);
         localStorage.setItem("maGiangVien", maGiangVien);
+      }
+
+      async function callApiXoaGiangVien(id) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify({
+          ma_giang_vien: id.toString(),
+        });
+        var requestOptions = {
+          method: "DELETE",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+        const response = await fetch(
+          "http://127.0.0.1:5000/giang_vien",
+          requestOptions
+        );
+        alert("Xóa giảng viên thành công !");
+        location.reload();
+        return await response.json();
       }
     </script>
   </body>
