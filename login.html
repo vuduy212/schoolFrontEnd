@@ -1,29 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/login.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <script>
+      const api_url = "http://127.0.0.1:5000/login";
+      async function fetchLogin(data) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify({
+          ten_dang_nhap: data["ten_dang_nhap"],
+          mat_khau: data["mat_khau"],
+        });
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+        const response = await fetch(
+          "http://127.0.0.1:5000/login",
+          requestOptions
+        );
+        return await response.json();
+      }
+
+      async function login() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        if (username == "" || password == "") {
+          localStorage.setItem("ten_dang_nhap", undefined);
+          localStorage.setItem("quyen", undefined);
+          alert("Vui lòng điền đầy đủ thông tin!");
+        } else {
+          const loginData = {
+            ten_dang_nhap: username,
+            mat_khau: password,
+          };
+          var data = await fetchLogin(loginData).then((result) => {
+            localStorage.setItem("ten_dang_nhap", result["ten_dang_nhap"]);
+            localStorage.setItem("quyen", result["quyen"]);
+          });
+        }
+        var quyen = localStorage.getItem("quyen");
+        if (quyen === "admin") {
+          window.location.assign("http://127.0.0.1:5500/giang_vien.html");
+        } else {
+          alert("Hãy đăng nhập bằng tài khoản admin");
+        }
+      }
+    </script>
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="header">
-        <div class="body">
-            <div class="login-page">
-                <div class="form">
-                    <div class="form-title" >Đăng nhập</div>
-                  <form class="login-form">
-                    <label for=""><b>Tên đăng nhập</b></label>
-                    <input type="text" placeholder="username"/>
-                    <label for=""><b>Mật khẩu</b></label>
-                    <input type="password" placeholder="password"/>
-                    <button>Đăng nhập</button>              
-                  </form>
-                </div>
-              </div>
+      <div class="body">
+        <div class="login-page">
+          <div class="form">
+            <div class="form-title">Đăng nhập</div>
+            <form class="login-form" onsubmit="return false">
+              <label for=""><b>Tên đăng nhập</b></label>
+              <input id="username" type="text" placeholder="username" />
+              <label for=""><b>Mật khẩu</b></label>
+              <input id="password" type="password" placeholder="password" />
+              <button onclick="login()">Đăng nhập</button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-   
-</body>
+  </body>
 </html>
