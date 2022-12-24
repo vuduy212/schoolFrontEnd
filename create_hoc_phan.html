@@ -534,25 +534,37 @@
               </div>
               <div class="card-body">
                 <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">Create hoc phan</div>
-                                <div class="card-body">
-                                    <form action="{{ route('permissions.store') }}" method="POST">
-                                        <div class="form-group row">
-                                            <label for="name" class="col-md-4 col-form-label text-md-right">Ten hoc phan</label>
-                                            <div class="col-md-6">
-                                                <input id="name" type="name" class="form-control" name="ten_hoc_phan">
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">
-                                            Create
-                                        </button>
-                                </div>
+                  <div class="row justify-content-center">
+                    <div class="col-md-8">
+                      <div class="card">
+                        <div class="card-header">Create hoc phan</div>
+                        <div class="card-body">
+                          <div class="form-group row">
+                            <label
+                              for="name"
+                              class="col-md-4 col-form-label text-md-right"
+                              >Ten hoc phan</label
+                            >
+                            <div class="col-md-6">
+                              <input
+                                id="ten_hoc_phan"
+                                type="name"
+                                class="form-control"
+                                name="ten_hoc_phan"
+                              />
                             </div>
+                          </div>
+                          <button
+                            onClick="taoMoiHocPhan()"
+                            type="submit"
+                            class="btn btn-primary"
+                          >
+                            Create
+                          </button>
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -635,5 +647,34 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+    <script>
+      const apiTaoMoiHocPhan = "http://127.0.0.1:5000/hoc_phan";
+      async function callApiTaoMoiHocPhan(data) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify({
+          ten_hoc_phan: data["ten_hoc_phan"],
+        });
+        var requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+        const response = await fetch(
+          "http://127.0.0.1:5000/hoc_phan",
+          requestOptions
+        );
+        alert("Tạo mới học phần thành công !");
+        return await response;
+      }
+      async function taoMoiHocPhan() {
+        var ten_hoc_phan = document.getElementById("ten_hoc_phan").value;
+        const createDataHocPhan = {
+          ten_hoc_phan: ten_hoc_phan,
+        };
+        var data = await callApiTaoMoiHocPhan(createDataHocPhan);
+      }
+    </script>
   </body>
 </html>

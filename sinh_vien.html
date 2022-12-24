@@ -331,7 +331,9 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                  <span
+                    class="mr-2 d-none d-lg-inline text-gray-600 small"
+                    id="username"
                     >Douglas McGee</span
                   >
                   <img
@@ -382,11 +384,17 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
               <div class="card-body">
-                <label>Tìm kiếm:<input type="search" class="form-control form-control-sm" placeholder=""></label>
+                <label
+                  >Tìm kiếm:<input
+                    type="search"
+                    class="form-control form-control-sm"
+                    placeholder=""
+                /></label>
+                <a href="create_sinh_vien.html">Tạo sinh viên</a>
                 <div class="table-responsive">
                   <table
                     class="table table-bordered"
-                    id="dataTable"
+                    id="dataTable1"
                     width="100%"
                     cellspacing="0"
                   >
@@ -394,25 +402,15 @@
                       <tr>
                         <th>Mã sinh viên</th>
                         <th>Họ tên</th>
-                        <th>Giới tính</th>
                         <th>Ngày sinh</th>
+                        <th>Giới tính</th>
                         <th>Quê quán</th>
-                        <th>Lớp</th>
                         <th>Khoa</th>
+                        <th>Lớp</th>
                         <th>Hành động</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                        <td>$320,800</td>
-                      </tr>
-                    </tbody>
+                    <tbody></tbody>
                   </table>
                 </div>
               </div>
@@ -496,5 +494,95 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+    <script>
+      const username = localStorage.getItem("ten_dang_nhap");
+      var usernameDiv = (document.getElementById("username").textContent =
+        username);
+
+      async function fetchSinhVien() {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var requestOptions = {
+          method: "GET",
+          headers: myHeaders,
+        };
+        const response = await fetch(
+          "http://127.0.0.1:5000/sinh_vien",
+          requestOptions
+        );
+        return await response.json();
+      }
+
+      async function getResult() {
+        let result = await fetchSinhVien();
+        return result;
+      }
+      async function doTask() {
+        let datas = await getResult();
+        for (const data in datas) {
+          addRow(datas[data]);
+        }
+      }
+
+      function addRow(data) {
+        var table = document.getElementById("dataTable1");
+        var lastrow = table.rows.length;
+        var lastcol = table.rows[0].cells.length;
+        var row = table.insertRow(lastrow);
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = "<td>" + data["ma_sinh_vien"] + "</td>";
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = "<td>" + data["ho_ten"] + "</td>";
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML = "<td>" + data["ngay_sinh"] + "</td>";
+        var cell4 = row.insertCell(3);
+        cell4.innerHTML = "<td>" + data["gioi_tinh"] + "</td>";
+        var cell5 = row.insertCell(4);
+        cell5.innerHTML = "<td>" + data["que_quan"] + "</td>";
+        var cell6 = row.insertCell(5);
+        cell6.innerHTML = "<td>" + data["lop"] + "</td>";
+        var cell7 = row.insertCell(6);
+        cell7.innerHTML = "<td>" + data["khoa"] + "</td>";
+        var cell8 = row.insertCell(7);
+        cell8.innerHTML =
+          "<td><a onClick='capNhatSinhVien(" +
+          data["ma_sinh_vien"] +
+          ")' id=" +
+          data["ma_sinh_vien"] +
+          " href='sua_sinh_vien.html'>Cập nhật</a>" +
+          " " +
+          "<a onClick='callApiXoaSinhVien(" +
+          data["ma_sinh_vien"] +
+          ")' id=" +
+          data["ma_sinh_vien"] +
+          " href='sinh_vien.html'>Xóa</a></td>";
+      }
+      doTask();
+      function capNhatSinhVien(maSinhVien) {
+        // var a = document.getElementById(maGiangVien);
+        localStorage.setItem("maSinhVien", maSinhVien);
+      }
+
+      async function callApiXoaSinhVien(id) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        var raw = JSON.stringify({
+          ma_sinh_vien: id.toString(),
+        });
+        var requestOptions = {
+          method: "DELETE",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+        const response = await fetch(
+          "http://127.0.0.1:5000/sinh_vien",
+          requestOptions
+        );
+        alert("Xóa sinh viên thành công !");
+        location.reload();
+        return await response.json();
+      }
+    </script>
   </body>
 </html>
