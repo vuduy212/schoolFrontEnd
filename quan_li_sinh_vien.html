@@ -10,7 +10,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
 
-    <title>SB Admin 2 - Tables</title>
+    <title>HUS ADMIN</title>
 
     <!-- Custom fonts for this template -->
     <link
@@ -25,6 +25,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
+
 
     <!-- Custom styles for this page -->
     <link
@@ -49,36 +50,34 @@
           <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
           </div>
-          <div class="sidebar-brand-text mx-3">HUS ADMIN</sup></div>
+          <div class="sidebar-brand-text mx-3">SINH VIÊN</div>
         </a>
-      
         <!-- Divider -->
         <hr class="sidebar-divider" />
 
         <!-- Heading -->
-        <div class="sidebar-heading">Quản lí</div>
-
+        <div class="sidebar-heading">Thông tin sinh viên</div>
         <!-- Nav Item - Tables -->
         <li class="nav-item active">
-          <a class="nav-link" href="sinh_vien.html">
+          <a class="nav-link" href="quan_li_sinh_vien.html">
             <i class="fas fa-fw fa-table"></i>
-            <span>Sinh viên</span></a
+            <span>Hồ sơ</span></a
           >
         </li>
 
         <li class="nav-item active">
           <a class="nav-link" href="giang_vien.html">
             <i class="fas fa-fw fa-table"></i>
-            <span>Giảng viên</span></a
+            <span>Điểm</span></a
           >
         </li>
 
-        <li class="nav-item active">
-          <a class="nav-link" href="hoc_phan.html">
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="chi_tiet_hoc_phan.html">
             <i class="fas fa-fw fa-table"></i>
-            <span>Học phần</span></a
+            <span>Chi tiết học phân</span></a
           >
-        </li>
+        </li> -->
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block" />
@@ -109,25 +108,6 @@
             </form>
 
             <!-- Topbar Search -->
-            <form
-              class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-            >
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control bg-light border-0 small"
-                  placeholder="Search for..."
-                  aria-label="Search"
-                  aria-describedby="basic-addon2"
-                />
-                <div class="input-group-append">
-                  <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
-
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
               <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -345,7 +325,9 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                  <span
+                    class="mr-2 d-none d-lg-inline text-gray-600 small"
+                    id="username"
                     >Douglas McGee</span
                   >
                   <img
@@ -391,97 +373,31 @@
           <!-- Begin Page Content -->
           <div class="container-fluid">
             <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Sinh viên</h1>
+
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
-              <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">
-                  Thêm giảng viên
-                </h6>
-              </div>
               <div class="card-body">
-                <div class="container">
-                  <div class="row justify-content-center">
-                    <div class="col-md-8">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="form-group row">
-                            <label
-                              for="name"
-                              class="col-md-4 col-form-label text-md-right"
-                              >Tên giảng viên</label
-                            >
-                            <div class="col-md-6">
-                              <input
-                                id="ho_ten"
-                                type="name"
-                                class="form-control"
-                                name="ho_ten"
-                              />
-                            </div>
-                            <label
-                              for="name"
-                              class="col-md-4 col-form-label text-md-right"
-                              >Ngày sinh</label
-                            >
-                            <div class="col-md-6">
-                              <input
-                                id="ngay_sinh"
-                                type="name"
-                                class="form-control"
-                                name="ngay_sinh"
-                              />
-                            </div>
-                            <label
-                              for="name"
-                              class="col-md-4 col-form-label text-md-right"
-                              >Giới tính</label
-                            >
-                            <div class="col-md-6">
-                              <input
-                                id="gioi_tinh"
-                                type="name"
-                                class="form-control"
-                                name="gioi_tinh"
-                              />
-                            </div>
-                            <label
-                              for="name"
-                              class="col-md-4 col-form-label text-md-right"
-                              >Chức vụ</label
-                            >
-                            <div class="col-md-6">
-                              <input
-                                id="chuc_vu"
-                                type="name"
-                                class="form-control"
-                                name="chuc_vu"
-                              />
-                            </div>
-                            <label
-                              for="name"
-                              class="col-md-4 col-form-label text-md-right"
-                              >Khoa</label
-                            >
-                            <div class="col-md-6">
-                              <input
-                                id="khoa"
-                                type="name"
-                                class="form-control"
-                                name="khoa"
-                              />
-                            </div>
-                          </div>
-                          <button
-                            onClick="taoMoiGiangVien()"
-                            type="submit"
-                            class="btn btn-primary"
-                          >
-                            Tạo
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div class="table-responsive">
+                  <table
+                    class="table table-bordered"
+                    id="dataTable1"
+                    width="100%"
+                    cellspacing="0"
+                  >
+                    <thead>
+                      <tr>
+                        <th>Mã sinh viên</th>
+                        <th>Họ tên</th>
+                        <th>Ngày sinh</th>
+                        <th>Giới tính</th>
+                        <th>Quê quán</th>
+                        <th>Khoa</th>
+                        <th>Lớp</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -494,7 +410,7 @@
         <footer class="sticky-footer bg-white">
           <div class="container my-auto">
             <div class="copyright text-center my-auto">
-              <span>Copyright &copy; Your Website 2020</span>
+              <span>QKA &copy; 26/12/2022</span>
             </div>
           </div>
         </footer>
@@ -565,45 +481,76 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
     <script>
-      const apiTaoMoiGiangVien = "http://127.0.0.1:5000/giang_vien";
-      async function callApiTaoMoiGiangVien(data) {
+      const username = localStorage.getItem("ten_dang_nhap");
+      const quyen = localStorage.getItem("quyen");
+      var usernameDiv = (document.getElementById("username").textContent =
+        username);
+
+      async function fetchSinhVien() {
+        const ma = localStorage.getItem("ma");
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        var raw = JSON.stringify({
-          ho_ten: data["ho_ten"],
-          gioi_tinh: data["gioi_tinh"],
-          ngay_sinh: data["ngay_sinh"],
-          khoa: data["khoa"],
-          chuc_vu: data["chuc_vu"],
-        });
         var requestOptions = {
-          method: "POST",
+          method: "GET",
           headers: myHeaders,
-          body: raw,
-          redirect: "follow",
         };
-        const response = await fetch(
-          "http://127.0.0.1:5000/giang_vien",
-          requestOptions
-        );
-        return await response;
+        var response;
+        if (quyen === 'sv') {
+          response = await fetch(
+            "http://127.0.0.1:5000/sinh_vien/" + ma,
+            requestOptions
+          );
+        } else if (quyen === 'gv') {
+          response = await fetch(
+            "http://127.0.0.1:5000/sinh_vien?ho_ten=" + "",
+            requestOptions
+          );
+        }
+        
+        return await response.json();
       }
-      async function taoMoiGiangVien() {
-        var ho_ten = document.getElementById("ho_ten").value;
-        var gioi_tinh = document.getElementById("gioi_tinh").value;
-        var ngay_sinh = document.getElementById("ngay_sinh").value;
-        var khoa = document.getElementById("khoa").value;
-        var chuc_vu = document.getElementById("chuc_vu").value;
-        const createDataGiangVien = {
-          ho_ten: ho_ten,
-          gioi_tinh: gioi_tinh,
-          ngay_sinh: ngay_sinh,
-          khoa: khoa,
-          chuc_vu: chuc_vu,
-        };
-        var data = await callApiTaoMoiGiangVien(createDataGiangVien);
-        window.location.assign("giang_vien.html");
+
+      async function getResult() {
+        let result = await fetchSinhVien();
+        return result;
       }
+      async function doTask() {
+        let datas = await getResult();
+        let typeOfDatas = typeof datas;
+        if (datas.length > 1) {
+          for (const data in datas) {
+            addRow(datas[data]);
+          }
+          return;
+        }
+        if (typeOfDatas === 'object') {
+          addRow(datas);
+          return;
+        }
+      }
+
+      function addRow(data) {
+        var quyen = localStorage.getItem('quyen');
+        var table = document.getElementById("dataTable1");
+        var lastrow = table.rows.length;
+        var lastcol = table.rows[0].cells.length;
+        var row = table.insertRow(lastrow);
+        var cell1 = row.insertCell(0);
+        cell1.innerHTML = "<td>" + data["ma_sinh_vien"] + "</td>";
+        var cell2 = row.insertCell(1);
+        cell2.innerHTML = "<td>" + data["ho_ten"] + "</td>";
+        var cell3 = row.insertCell(2);
+        cell3.innerHTML = "<td>" + data["ngay_sinh"] + "</td>";
+        var cell4 = row.insertCell(3);
+        cell4.innerHTML = "<td>" + data["gioi_tinh"] + "</td>";
+        var cell5 = row.insertCell(4);
+        cell5.innerHTML = "<td>" + data["que_quan"] + "</td>";
+        var cell6 = row.insertCell(5);
+        cell6.innerHTML = "<td>" + data["lop"] + "</td>";
+        var cell7 = row.insertCell(6);
+        cell7.innerHTML = "<td>" + data["khoa"] + "</td>";
+      }
+      doTask();
     </script>
   </body>
 </html>

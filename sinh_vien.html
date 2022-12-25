@@ -25,6 +25,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="css/quanli.css" rel="stylesheet" />
 
     <!-- Custom styles for this page -->
     <link
@@ -384,15 +385,20 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
               <div class="card-body">
-                <label
-                  >Tìm kiếm:<input
+                <label>Tìm kiếm:</label>
+                <div class="search-box">
+                  <input
                     id="search"
                     type="search"
                     class="form-control form-control-sm"
                     placeholder="Nhập tên sinh viên..."
                   />
-                  <button onClick="timKiem()">Tìm kiếm</button></label
-                >
+                  <div class="input-group-append search-btn">
+                    <button class="btn btn-primary" type="button" onClick="timKiem()">
+                      <i class="fas fa-search fa-sm"></i>
+                    </button>
+                  </div>
+                </div>
                 <a href="create_sinh_vien.html">Tạo sinh viên</a>
                 <div class="table-responsive">
                   <table

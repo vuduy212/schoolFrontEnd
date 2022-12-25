@@ -42,11 +42,14 @@
           var data = await fetchLogin(loginData).then((result) => {
             localStorage.setItem("ten_dang_nhap", result["ten_dang_nhap"]);
             localStorage.setItem("quyen", result["quyen"]);
+            localStorage.setItem("ma", result["ma"]);
           });
         }
         var quyen = localStorage.getItem("quyen");
         if (quyen === "admin") {
-          window.location.assign("http://127.0.0.1:5500/giang_vien.html");
+          window.location.assign("giang_vien.html");
+        } else if (quyen === 'sv' || quyen === 'gv') {
+          window.location.assign("quan_li_sinh_vien.html");
         } else {
           alert("Hãy đăng nhập bằng tài khoản admin");
         }

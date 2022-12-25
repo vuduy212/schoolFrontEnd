@@ -1,0 +1,9 @@
+.search-box {
+    display: flex;
+    width: 50%;
+}
+
+.search-btn {
+    height: 30px;
+    align-items: center;
+}
